@@ -1,0 +1,2 @@
+REACT_APP_API_URL=api Url관련
+REACT_APP_SERVICE_KEY=api 호출 key
