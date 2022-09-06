@@ -1,25 +1,45 @@
 import React from 'react'
-import styled from 'styled-components'
-import { AiFillStar } from 'react-icons/ai'
+import styled, { keyframes } from 'styled-components'
+import { AiTwotoneStar } from 'react-icons/ai'
 
-const MovieCard = ({ poster, title, vote }) => {
+const SkeletonCard = () => {
   return (
     <MovieCardContainer>
-      <MovieHeader poster={poster}></MovieHeader>
+      <MovieHeader></MovieHeader>
       <MovieContent>
         <MovieContentHeader>
-          <MovieTitle>{title}</MovieTitle>
+          <MovieTitle></MovieTitle>
           <MovieVote>
             <MovieIconDiv>
-              <AiFillStar />
+              <AiTwotoneStar />
             </MovieIconDiv>
-            <MovieRateDiv>{vote}</MovieRateDiv>
+            <MovieRateDiv></MovieRateDiv>
           </MovieVote>
         </MovieContentHeader>
       </MovieContent>
     </MovieCardContainer>
   )
 }
+
+const SkeletonAnimation = keyframes`
+    0% {
+        background-color: rgba(165, 165, 165, 0.1);
+        color: rgba(165, 165, 165, 0.1);
+
+    }
+
+    50% {
+        background-color: rgba(165, 165, 165, 0.3);
+        color: rgba(165, 165, 165, 0.1);
+
+    }
+
+    100% {
+        background-color: rgba(165, 165, 165, 0.1);
+        color: rgba(165, 165, 165, 0.1);
+
+    }
+`
 
 const MovieCardContainer = styled.div`
   background: ${({ theme }) => theme.white};
@@ -40,8 +60,9 @@ const MovieHeader = styled.div`
   width: 100%;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
-  background: url(${props => props.poster}) no-repeat;
+  background: ${({ theme }) => theme.white} no-repeat;
   background-size: cover;
+  animation: ${SkeletonAnimation} 1.8s infinite ease-in-out;
 `
 
 const MovieContent = styled.div`
@@ -58,10 +79,16 @@ const MovieContentHeader = styled.div`
 
 const MovieTitle = styled.div`
   font-size: 24px;
+  width: 200px;
+  height: 40px;
+  border-radius: 10px;
   margin: 0;
+  animation: ${SkeletonAnimation} 1.8s infinite ease-in-out;
 `
 
-const MovieIconDiv = styled.div``
+const MovieIconDiv = styled.div`
+  color: rgb(165, 165, 165);
+`
 
 const MovieRateDiv = styled.div``
 
@@ -70,4 +97,4 @@ const MovieVote = styled.div`
   display: flex;
 `
 
-export default MovieCard
+export default SkeletonCard
