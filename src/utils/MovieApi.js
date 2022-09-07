@@ -19,3 +19,16 @@ export const getMovieList = async (url, page) => {
     return err
   }
 }
+
+export const getSearchResults = async (title, page) => {
+  const res = await Axios({
+    url: `/search/movie`,
+    method: 'get',
+    params: {
+      query: title,
+      page,
+    },
+  })
+
+  return res.data
+}
