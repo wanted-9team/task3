@@ -1,7 +1,8 @@
 import React, { useEffect, useMemo } from 'react'
 import Loading from 'components/Loading'
 import MovieCard from 'components/MovieCard'
-import MovieListPageTitle from './MovieListPageTitle'
+import MovieListPageTitle from './components/MovieListPageTitle'
+import EmptyResult from 'components/EmptyResult'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { useInfiniteQuery } from '@tanstack/react-query'
 import { getMovieListApi } from 'utils/MovieApi'
@@ -44,25 +45,18 @@ const MovieLists = () => {
   if (isLoading) return <Loading />
 
   return (
-    <>
-      {isFetching && <Loading />}
-      <MoviePageContainer>
-        <MovieListPageTitle movieListQueryKey={movieListQueryKey} />
-        <MovieListBox>
-          {movieResults &&
-            movieResults.map(movie => (
-              <MovieCardWrapper key={movie.id} onClick={() => handleNavigate(movie.id)}>
-                <MovieCard
-                  title={movie.title}
-                  poster={movie.poster_path}
-                  vote={movie.vote_average}
-                />
-              </MovieCardWrapper>
-            ))}
-        </MovieListBox>
-        {hasNextPage ? <div ref={ref}></div> : null}
-      </MoviePageContainer>
-    </>
+    <MoviePageContainer>
+      <MovieListPageTitle movieListQueryKey={movieListQueryKey} />
+      <MovieListBox>
+        {movieResults &&
+          movieResults.map(movie => (
+            <MovieCardWrapper key={movie.id} onClick={() => handleNavigate(movie.id)}>
+              <MovieCard title={movie.title} poster={movie.poster_path} vote={movie.vote_average} />
+            </MovieCardWrapper>
+          ))}
+      </MovieListBox>
+      {hasNextPage ? <div ref={ref}> {isFetching && <Loading />}</div> : <EmptyResult />}
+    </MoviePageContainer>
   )
 }
 export default MovieLists
