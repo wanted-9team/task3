@@ -5,7 +5,7 @@ import Loading from 'components/Loading'
 import MovieCard from 'components/MovieCard'
 import { useInView } from 'react-intersection-observer'
 import styled from 'styled-components'
-import { useLocation } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 
@@ -13,8 +13,8 @@ const SearchResults = () => {
   const location = useLocation()
   const searchWord = location.state
   const lowerSearchWord = searchWord.toLowerCase()
-
   const { ref, inView } = useInView()
+  const navigate = useNavigate()
 
   const { data, isLoading, hasNextPage, fetchNextPage, isFetching, isFetchingNextPage, refetch } =
     useInfiniteQuery(
@@ -39,6 +39,10 @@ const SearchResults = () => {
     }
   }, [inView, fetchNextPage])
 
+  const handleNavigate = movieId => {
+    navigate(`/movie_detail/${movieId}`)
+  }
+
   if (isLoading) return <Loading />
 
   return (
@@ -53,12 +57,13 @@ const SearchResults = () => {
         {data?.pages.length > 0 &&
           data.pages?.map(({ results }) =>
             results.map(movie => (
-              <MovieCard
-                key={movie.id}
-                title={movie.title}
-                poster={movie.poster_path}
-                vote={movie.vote_average}
-              />
+              <MovieCardWrapper key={movie.id} onClick={() => handleNavigate(movie.id)}>
+                <MovieCard
+                  title={movie.title}
+                  poster={movie.poster_path}
+                  vote={movie.vote_average}
+                />
+              </MovieCardWrapper>
             )),
           )}
       </MovieList>
@@ -93,3 +98,4 @@ const MovieList = styled.div`
   max-width: 1200px;
   margin: 0 auto;
 `
+const MovieCardWrapper = styled.div``
