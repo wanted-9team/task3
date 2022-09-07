@@ -9,6 +9,13 @@ const Header = () => {
   const [showLinks, setShowLinks] = useState(false)
   const [searchWords, setSearchWords] = useState('')
 
+  const handleSearchSubmit = e => {
+    e.preventDefault()
+    searchWords
+      ? navigate('/search_results', { state: searchWords })
+      : alert('검색어를 입력해주세요.')
+  }
+
   return (
     <NavBar>
       <LeftSide>
@@ -36,16 +43,12 @@ const Header = () => {
           {!showLinks ? <AiOutlineMenu /> : <AiOutlineClose />}
         </MenuButton>
       </LeftSide>
-      <RightSide>
+      <RightSide onSubmit={handleSearchSubmit}>
         <NavInput type="text" placeholder="" onChange={e => setSearchWords(e.target.value)} />
         <NavButton>
-          <AiOutlineSearch
-            onClick={() => {
-              searchWords
-                ? navigate('/search_results', { state: searchWords })
-                : alert('검색어를 입력해주세요.')
-            }}
-          />
+
+          <AiOutlineSearch />
+
         </NavButton>
       </RightSide>
     </NavBar>
@@ -124,7 +127,7 @@ const MenuButton = styled.button`
   }
 `
 
-const RightSide = styled.div`
+const RightSide = styled.form`
   flex: 50%;
   display: flex;
   align-items: center;
