@@ -4,9 +4,9 @@ export const popularMovieApi = async currentPage => {
   return await Axios.get('/movie/popular', { params: { page: currentPage } })
 }
 
-export const getMovieList = async (url, page) => {
+export const getMovieListApi = async (query, page) => {
   const res = await Axios({
-    url: `/movie${url}`,
+    url: `/movie/${query}`,
     method: 'get',
     params: {
       page,
