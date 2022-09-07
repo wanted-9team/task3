@@ -10,6 +10,7 @@ const Loading = () => {
 }
 
 export default Loading
+
 const rotate360 = keyframes`
   from {
     transform: rotate(0deg);

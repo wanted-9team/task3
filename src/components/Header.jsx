@@ -46,7 +46,9 @@ const Header = () => {
       <RightSide onSubmit={handleSearchSubmit}>
         <NavInput type="text" placeholder="" onChange={e => setSearchWords(e.target.value)} />
         <NavButton>
+
           <AiOutlineSearch />
+
         </NavButton>
       </RightSide>
     </NavBar>
