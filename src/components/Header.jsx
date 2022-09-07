@@ -41,7 +41,9 @@ const Header = () => {
         <NavButton>
           <AiOutlineSearch
             onClick={() => {
-              navigate('/search_results', { state: searchWords })
+              searchWords
+                ? navigate('/search_results', { state: searchWords })
+                : alert('검색어를 입력해주세요.')
             }}
           />
         </NavButton>
@@ -51,7 +53,7 @@ const Header = () => {
 }
 
 const NavBar = styled.div`
-  background-color: #021e39;
+  background-color: ${({ theme }) => theme.navy};
   width: 100%;
   height: 80px;
   font-family: Arial, Helvetica, sans-serif;
@@ -61,12 +63,12 @@ const NavBar = styled.div`
 
 const NavBarBtn = styled.div`
   transition: all 0.3s;
+  padding: 6px 5px;
+  height: 100%;
   &:hover {
-    background-color: white;
-    color: black;
-    padding: 3px 5px;
+    background-color: ${({ theme }) => theme.hover};
+    color: ${({ theme }) => theme.navy};
     border-radius: 2px;
-    padding: 5px;
   }
 `
 
@@ -79,7 +81,7 @@ const LeftSide = styled.div`
 
 const Links = styled.div`
   max-height: 80px;
-  font-size: 25px;
+  font-size: 22px;
   display: flex;
 
   @media only screen and (max-width: 768px) {
@@ -92,7 +94,7 @@ const Links = styled.div`
         top: 80px;
         height: 180px;
         width: 100%;
-        background-color: #021e39;
+        background-color: ${({ theme }) => theme.navy};
         display: flex;
         flex-direction: column;
         align-items: center;
