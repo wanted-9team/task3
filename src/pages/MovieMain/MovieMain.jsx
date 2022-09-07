@@ -7,7 +7,6 @@ import Carousel from './components/Carousel'
 import MovieCard from 'components/MovieCard'
 
 const MovieMain = () => {
-
   const { ref, inView } = useInView()
   const { data, fetchNextPage, hasNextPage } = useInfiniteQuery(
     ['popularMovie'],
@@ -54,7 +53,6 @@ const MovieMain = () => {
       {hasNextPage ? <ContainerBottom ref={ref}></ContainerBottom> : null}
     </MainPageContainer>
   )
-
 }
 
 export default MovieMain
