@@ -11,15 +11,15 @@ import 'react-loading-skeleton/dist/skeleton.css'
 
 const SearchResults = () => {
   const location = useLocation()
-  const title = 'yes' // 추후 삭제
-  // const title = location.state.title
-  const lowerCaseTitle = title.toLowerCase()
+  const searchWord = 'YES' // 추후 삭제
+  // const searchWord = location.state.searchWord
+  const lowerSearchWord = searchWord.toLowerCase()
   const { ref, inView } = useInView()
 
   const { data, isLoading, hasNextPage, fetchNextPage, isFetching, isFetchingNextPage, refetch } =
     useInfiniteQuery(
       ['search_result'],
-      ({ pageParam = 1 }) => getSearchResults(lowerCaseTitle, pageParam),
+      ({ pageParam = 1 }) => getSearchResults(lowerSearchWord, pageParam),
       {
         getNextPageParam: (lastPage, allPages) => {
           const maxPages = lastPage.total_pages
@@ -31,7 +31,7 @@ const SearchResults = () => {
 
   useEffect(() => {
     refetch()
-  }, [lowerCaseTitle, refetch])
+  }, [lowerSearchWord, refetch])
 
   useEffect(() => {
     if (inView) {
@@ -45,7 +45,7 @@ const SearchResults = () => {
     <SearchResultWrapper>
       {(
         <SearchWord>
-          '{title}'에 대한 {data?.pages[0].total_results}개의 결과가 있습니다.
+          '{searchWord}'에 대한 {data?.pages[0].total_results}개의 결과가 있습니다.
         </SearchWord>
       ) || <Skeleton />}
       <MovieList>
