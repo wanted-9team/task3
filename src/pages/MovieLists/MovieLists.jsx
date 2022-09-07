@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import Loading from 'components/Loading'
 import MovieCard from 'components/MovieCard'
 import MovieListPageTitle from './MovieListPageTitle'
@@ -68,7 +68,7 @@ const MovieLists = () => {
 export default MovieLists
 
 const MoviePageContainer = styled.div`
-  width: 1200px;
+  max-width: 1200px;
   margin: 0 auto;
   position: relative;
 `
