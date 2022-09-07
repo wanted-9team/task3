@@ -6,23 +6,21 @@ const MovieListPageTitle = ({ movieListQueryKey }) => {
     case 'now_playing':
       return (
         <TitleWapper>
-          <TitleText>현재 상영중</TitleText>
+          <TitleText>박스오피스</TitleText>
         </TitleWapper>
       )
     case 'upcoming':
       return (
         <TitleWapper>
-          <TitleText>개봉 예정 영화</TitleText>
+          <TitleText>상영예정</TitleText>
         </TitleWapper>
       )
-
     case 'top_rated':
       return (
         <TitleWapper>
-          <TitleText>높은 평점 영화</TitleText>
+          <TitleText>인기 영화</TitleText>
         </TitleWapper>
       )
-
     default:
       return null
   }

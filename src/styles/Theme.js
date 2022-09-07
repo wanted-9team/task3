@@ -6,6 +6,8 @@ const theme = {
   border: '#717171',
   hover: '#fb0',
   navy: '#021e39',
+  purpleLight: '#ba68c8',
+  purpleDark: '#9c27b0',
 
   flex: (direction = 'row', justify = 'center', align = 'center') => `
     display: flex;
