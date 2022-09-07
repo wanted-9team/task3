@@ -1,29 +1,32 @@
 import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import styled, { css } from 'styled-components'
-import { AiOutlineMenu } from 'react-icons/ai'
-import { AiOutlineClose } from 'react-icons/ai'
-import { AiOutlineSearch } from 'react-icons/ai'
+import { AiOutlineMenu, AiOutlineHome, AiOutlineClose, AiOutlineSearch } from 'react-icons/ai'
+import { useNavigate } from 'react-router-dom'
 
 const Header = () => {
+  const navigate = useNavigate()
   const [showLinks, setShowLinks] = useState(false)
+  const [searchWords, setSearchWords] = useState('')
 
   return (
     <NavBar>
       <LeftSide>
         <Links showLinks={showLinks}>
-          <div>
-            <NavLink to="/">Home</NavLink>
-          </div>
-          <div>
-            <NavLink to="/upcoming">Upcoming</NavLink>
-          </div>
-          <div>
-            <NavLink to="/now_playing">Now Playing </NavLink>
-          </div>
-          <div>
-            <NavLink to="/top_rated">Top Rated</NavLink>
-          </div>
+          <NavBarBtn>
+            <NavLink to="/">
+              <AiOutlineHome />
+            </NavLink>
+          </NavBarBtn>
+          <NavBarBtn>
+            <NavLink to="/upcoming">#상영예정</NavLink>
+          </NavBarBtn>
+          <NavBarBtn>
+            <NavLink to="/now_playing">#박스오피스 </NavLink>
+          </NavBarBtn>
+          <NavBarBtn>
+            <NavLink to="/top_rated">#인기</NavLink>
+          </NavBarBtn>
         </Links>
         <MenuButton
           onClick={() => {
@@ -34,9 +37,13 @@ const Header = () => {
         </MenuButton>
       </LeftSide>
       <RightSide>
-        <NavInput type="text" placeholder="" />
+        <NavInput type="text" placeholder="" onChange={e => setSearchWords(e.target.value)} />
         <NavButton>
-          <AiOutlineSearch />
+          <AiOutlineSearch
+            onClick={() => {
+              navigate('/search_results', { state: searchWords })
+            }}
+          />
         </NavButton>
       </RightSide>
     </NavBar>
@@ -50,6 +57,17 @@ const NavBar = styled.div`
   font-family: Arial, Helvetica, sans-serif;
   display: flex;
   color: #fff;
+`
+
+const NavBarBtn = styled.div`
+  transition: all 0.3s;
+  &:hover {
+    background-color: white;
+    color: black;
+    padding: 3px 5px;
+    border-radius: 2px;
+    padding: 5px;
+  }
 `
 
 const LeftSide = styled.div`
@@ -87,7 +105,7 @@ const Links = styled.div`
   }
 
   & div {
-    margin-left: 15px;
+    margin-left: 20px;
     @media only screen and (max-width: 768px) {
       font-size: 20px;
     }
