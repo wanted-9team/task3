@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import Loading from 'components/Loading'
 import MovieCard from 'components/MovieCard'
 import MovieListPageTitle from './MovieListPageTitle'

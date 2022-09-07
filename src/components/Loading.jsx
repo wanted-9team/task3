@@ -21,7 +21,7 @@ const rotate360 = keyframes`
 const Wrapper = styled.div`
   position: fixed;
   bottom: 12%;
-  right: 5%;
+  right: 3%;
 `
 const Spinner = styled.div`
   animation: ${rotate360} 1s linear infinite;
