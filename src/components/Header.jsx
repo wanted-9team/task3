@@ -46,9 +46,7 @@ const Header = () => {
       <RightSide onSubmit={handleSearchSubmit}>
         <NavInput type="text" placeholder="" onChange={e => setSearchWords(e.target.value)} />
         <NavButton>
-
           <AiOutlineSearch />
-
         </NavButton>
       </RightSide>
     </NavBar>
@@ -95,13 +93,13 @@ const Links = styled.div`
         position: absolute;
         left: 0px;
         top: 80px;
-        height: 180px;
         width: 100%;
         background-color: ${({ theme }) => theme.navy};
         display: flex;
         flex-direction: column;
         align-items: center;
         max-height: 230px;
+        z-index: 1;
         & div {
           margin: 10px;
           font-size: 25px;
