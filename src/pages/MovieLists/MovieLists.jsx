@@ -2,7 +2,7 @@ import React, { useEffect, useMemo } from 'react'
 import Loading from 'components/Loading'
 import MovieCard from 'components/MovieCard'
 import MovieListPageTitle from './MovieListPageTitle'
-import { useLocation } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import { useInfiniteQuery } from '@tanstack/react-query'
 import { getMovieList } from 'utils/MovieApi'
 import { useInView } from 'react-intersection-observer'
@@ -11,7 +11,7 @@ import styled from 'styled-components'
 const MovieLists = () => {
   const { pathname } = useLocation()
   const { ref, inView } = useInView()
-
+  const navigate = useNavigate()
   const movieListQueryKey = pathname.slice(1, pathname.length)
 
   const { data, isLoading, hasNextPage, fetchNextPage, isFetching } = useInfiniteQuery(
@@ -37,6 +37,10 @@ const MovieLists = () => {
     return results || null
   }, [data])
 
+  const handleNavigate = movieId => {
+    navigate(`/movie_detail/${movieId}`)
+  }
+
   if (isLoading) return <Loading />
 
   return (
@@ -45,12 +49,9 @@ const MovieLists = () => {
       <MovieListBox>
         {movieResults &&
           movieResults.map(movie => (
-            <MovieCard
-              key={movie.id}
-              title={movie.title}
-              poster={movie.poster_path}
-              vote={movie.vote_average}
-            />
+            <MovieCardWrapper key={movie.id} onClick={() => handleNavigate(movie.id)}>
+              <MovieCard title={movie.title} poster={movie.poster_path} vote={movie.vote_average} />
+            </MovieCardWrapper>
           ))}
       </MovieListBox>
       {hasNextPage ? <div ref={ref}>{isFetching ? <Loading /> : null}</div> : null}
@@ -64,7 +65,7 @@ const MoviePageContainer = styled.div`
   margin: 0 auto;
   position: relative;
 `
-
+const MovieCardWrapper = styled.div``
 const MovieListBox = styled.div`
   ${({ theme }) => theme.flex('row', 'space-around')};
   flex-wrap: wrap;
