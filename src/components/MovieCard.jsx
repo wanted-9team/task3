@@ -5,7 +5,9 @@ import { AiFillStar } from 'react-icons/ai'
 const MovieCard = ({ poster, title, vote }) => {
   return (
     <MovieCardContainer>
-      <MovieHeader poster={poster}></MovieHeader>
+      <MovieImageDiv>
+        <img src={`https://image.tmdb.org/t/p/w500/${poster}`} alt="" />
+      </MovieImageDiv>
       <MovieContent>
         <MovieContentHeader>
           <MovieTitle>{title}</MovieTitle>
@@ -28,20 +30,25 @@ const MovieCardContainer = styled.div`
   max-width: 315px;
   margin: 2em;
   border-radius: 10px;
-  translate: all 0.3s;
+  transition: all 0.3s;
 
   &:hover {
     transform: scale(1.01);
     box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.08);
   }
 `
-const MovieHeader = styled.div`
+const MovieImageDiv = styled.div`
   height: 360px;
   width: 100%;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
-  background: url(${props => props.poster}) no-repeat;
-  background-size: cover;
+  & img {
+    width: 100%;
+    height: 100%;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    object-fit: cover;
+  }
 `
 
 const MovieContent = styled.div`
