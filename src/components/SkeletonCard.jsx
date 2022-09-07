@@ -57,7 +57,7 @@ const MovieCardContainer = styled.div`
     box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.08);
   }
 `
-const MovieImageDiv = styled.div`
+export const MovieImageDiv = styled.div`
   height: 360px;
   width: 100%;
   border-top-left-radius: 10px;

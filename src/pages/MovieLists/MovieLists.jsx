@@ -4,7 +4,7 @@ import MovieCard from 'components/MovieCard'
 import MovieListPageTitle from './MovieListPageTitle'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { useInfiniteQuery } from '@tanstack/react-query'
-import { getMovieList } from 'utils/MovieApi'
+import { getMovieListApi } from 'utils/MovieApi'
 import { useInView } from 'react-intersection-observer'
 import styled from 'styled-components'
 
@@ -16,7 +16,7 @@ const MovieLists = () => {
 
   const { data, isLoading, hasNextPage, fetchNextPage, isFetching } = useInfiniteQuery(
     [`${movieListQueryKey}`, `${pathname}`],
-    ({ pageParam = 1 }) => getMovieList(pathname, pageParam),
+    ({ pageParam = 1 }) => getMovieListApi(movieListQueryKey, pageParam),
     {
       getNextPageParam: (lastPage, allPages) => {
         const maxPages = lastPage.total_pages
