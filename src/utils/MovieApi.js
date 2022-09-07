@@ -3,21 +3,16 @@ import { Axios } from 'api'
 export const popularMovieApi = async currentPage => {
   return await Axios.get('/movie/popular', { params: { page: currentPage } })
 }
-export const getMovieList = async (url, page) => {
-  try {
-    const res = await Axios({
-      url: `/movie${url}`,
-      method: 'get',
-      params: {
-        page,
-      },
-    })
 
-    return res.data
-  } catch (err) {
-    console.log(err)
-    return err
-  }
+export const getMovieListApi = async (query, page) => {
+  const res = await Axios({
+    url: `/movie/${query}`,
+    method: 'get',
+    params: {
+      page,
+    },
+  })
+  return res.data
 }
 
 export const getSearchResults = async (title, page) => {
@@ -29,6 +24,5 @@ export const getSearchResults = async (title, page) => {
       page,
     },
   })
-
   return res.data
 }

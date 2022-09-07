@@ -1,19 +1,28 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import { AiFillStar } from 'react-icons/ai'
 
+import { MovieImageDiv as StyleMovieImageDiv } from './SkeletonCard'
 const MovieCard = ({ poster, title, vote }) => {
+  const [loaded, setLoaded] = useState(false)
+  const onLoad = () => {
+    setLoaded(true)
+  }
+
   return (
     <MovieCardContainer>
       <MovieImageDiv>
-        <img
+        <MovieImage
           src={
             poster
               ? `https://image.tmdb.org/t/p/w300/${poster}`
               : 'https://cdn.discordapp.com/attachments/1014088216132988928/1016987090208182293/Vector.png'
           }
-          alt=""
+          alt={title}
+          onLoad={onLoad}
+          loaded={loaded}
         />
+        {!loaded && <StyleMovieImageDiv />}
       </MovieImageDiv>
 
       <MovieContent>
@@ -47,11 +56,17 @@ const MovieCardContainer = styled.div`
     box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.08);
   }
 `
+
+const MovieImage = styled.img`
+  display: ${({ loaded }) => (loaded ? 'block' : 'none')};
+`
+
 const MovieImageDiv = styled.div`
   height: 360px;
   width: 100%;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
+  position: relative;
   & img {
     width: 100%;
     height: 100%;
