@@ -1,7 +1,7 @@
 import { Axios } from 'api'
 
-export const popularMovieApi = async () => {
-  return await Axios.get('/movie/popular')
+export const popularMovieApi = async currentPage => {
+  return await Axios.get('/movie/popular', { params: { page: currentPage } })
 }
 export const getMovieList = async (url, page) => {
   try {

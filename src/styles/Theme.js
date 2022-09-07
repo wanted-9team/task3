@@ -22,7 +22,7 @@ const theme = {
   `,
 
   headerFont: css`
-    font-size: 24px;
+    font-size: 32px;
     font-weight: 700;
   `,
 
