@@ -1,8 +1,14 @@
 # 원티드 프리온보딩 6차 2차 과제
 
+## 9팀 소개
+
+| <img src="https://avatars.githubusercontent.com/u/92010078?v=4"/> | <img src="https://avatars.githubusercontent.com/u/92101831?v=4"/> | <img src="https://avatars.githubusercontent.com/u/69101321?v=4"/> | <img src="https://avatars.githubusercontent.com/u/85508157?v=4"/> | <img src="https://avatars.githubusercontent.com/u/97271725?v=4"> |
+| ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- | ---------------------------------------------------------------- |
+| <a href="https://github.com/many-yun">[팀장] 김다윤</a>           | <a href="https://github.com/blcklamb">김채정</a>                  | <a href="https://github.com/jaehyeon74">박재현</a>                | <a href="https://github.com/sacultang">오영재</a>                 | <a href="https://github.com/jungdeokwoo">정덕우</a>              |
+
 ## 과제 설명
 
-원티드 프리온보딩 프론트엔드 기업협업과제
+원티드 프리온보딩 프론트엔드 기업협업과제 - **영화 트레일러 사이트 만들기**
 
 [👉 선발 과제 관련 링크]()
 
@@ -17,15 +23,37 @@ $ npm install
 $ npm start
 ```
 
-## 9팀 소개
-
-| <img src="https://avatars.githubusercontent.com/u/92010078?v=4"/> | <img src="https://avatars.githubusercontent.com/u/92101831?v=4"/> | <img src="https://avatars.githubusercontent.com/u/69101321?v=4"/> | <img src="https://avatars.githubusercontent.com/u/59791809?v=4"> | <img src="https://avatars.githubusercontent.com/u/85508157?v=4"/> | <img src="https://avatars.githubusercontent.com/u/71773680?v=4"> | <img src="https://avatars.githubusercontent.com/u/97271725?v=4"> |
-| ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- | ---------------------------------------------------------------- | ----------------------------------------------------------------- | ---------------------------------------------------------------- | ---------------------------------------------------------------- |
-| <a href="https://github.com/many-yun">[팀장] 김다윤</a>           | <a href="https://github.com/blcklamb">김채정</a>                  | <a href="https://github.com/jaehyeon74">박재현</a>                | <a href="https://github.com/hlezg08">성혜린</a>                  | <a href="https://github.com/sacultang">오영재</a>                 | <a href="https://github.com/estherjj">전에스더</a>               | <a href="https://github.com/jungdeokwoo">정덕우</a>              |
-
 ## 라우팅
 
+- `/` : homepage이자 popular 리스트 페이지
+- `/now_playing` : now playing page, 상영 중인 영화들
+- `/upcoming` : upcoming page, 개봉 예정 영화들
+- `/top_rated` : 최고 평점 영화들
+- `/movie_detail/:id` : 상세 영화 페이지
+- `/search_results` : 영화 검색 결과들 페이지
+
 ## 과제 달성 사항 및 해결 방법
+
+- 공통
+
+  - Loading 상태 표기
+  - Infinite scroll
+  - 스크롤 감지하여 ScrollUp button 표시되도록, 누를 시 최상단으로 스크롤 이동
+  - API Response 데이터 캐쉬
+
+- movies
+
+  - 제목, 포스터, 별점 표시
+  - 포스터 없는 경우, 대체 이미지 사용
+
+- movie
+
+  - 비디오 있는 경우, 페이지 진입 시 자동으로 비디오 플레이
+  - 제목, 포스터, 별점, 제작 연도, 장르 데이터 활용해서 UI 표기
+
+- search
+  - 제목, 포스터, 별점
+  - 포스터 없는 경우, 대체 이미지 사용
 
 ## 레포지토리 구조
 
