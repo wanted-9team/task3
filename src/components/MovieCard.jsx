@@ -8,6 +8,7 @@ const MovieCard = ({ poster, title, vote }) => {
       <MovieImageDiv>
         <img src={`https://image.tmdb.org/t/p/w500/${poster}`} alt="" />
       </MovieImageDiv>
+
       <MovieContent>
         <MovieContentHeader>
           <MovieTitle>{title}</MovieTitle>
