@@ -17,14 +17,14 @@ const MovieCard = ({ poster, title, vote }) => {
       </MovieImageDiv>
 
       <MovieContent>
+        <MovieVote>
+          <MovieIconDiv>
+            <AiFillStar />
+          </MovieIconDiv>
+          <MovieRateDiv>{vote}</MovieRateDiv>
+        </MovieVote>
         <MovieContentHeader>
           <MovieTitle>{title}</MovieTitle>
-          <MovieVote>
-            <MovieIconDiv>
-              <AiFillStar />
-            </MovieIconDiv>
-            <MovieRateDiv>{vote}</MovieRateDiv>
-          </MovieVote>
         </MovieContentHeader>
       </MovieContent>
     </MovieCardContainer>
@@ -32,10 +32,11 @@ const MovieCard = ({ poster, title, vote }) => {
 }
 
 const MovieCardContainer = styled.div`
+  cursor: pointer;
   background: ${({ theme }) => theme.white};
   box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.1);
   width: 300px;
-  height: 420px;
+  height: 450px;
   margin: 2em;
   border-radius: 10px;
   transition: all 0.3s;
@@ -61,8 +62,9 @@ const MovieImageDiv = styled.div`
 `
 
 const MovieContent = styled.div`
-  padding: 18px 18px 24px 18px;
+  padding: 10px 18px 36px 18px;
   margin: 0;
+  ${({ theme }) => theme.flex}
 `
 
 const MovieContentHeader = styled.div`
@@ -73,15 +75,20 @@ const MovieContentHeader = styled.div`
 const MovieTitle = styled.div`
   font-size: 24px;
   margin: 0;
+  line-height: 28px;
 `
 
 const MovieIconDiv = styled.div``
 
-const MovieRateDiv = styled.div``
+const MovieRateDiv = styled.div`
+  margin-right: 10px;
+  border-radius: 5px;
+`
 
 const MovieVote = styled.div`
   font-size: 30px;
   display: flex;
+  align-items: center;
   position: absolute;
   top: 5px;
   right: 5px;
