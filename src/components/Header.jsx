@@ -20,20 +20,20 @@ const Header = () => {
     <NavBar>
       <LeftSide>
         <Links showLinks={showLinks}>
-          <NavBarBtn>
-            <NavLink to="/">
+          <NavLink to="/">
+            <NavBarBtn>
               <AiOutlineHome />
-            </NavLink>
-          </NavBarBtn>
-          <NavBarBtn>
-            <NavLink to="/upcoming">#상영예정</NavLink>
-          </NavBarBtn>
-          <NavBarBtn>
-            <NavLink to="/now_playing">#박스오피스 </NavLink>
-          </NavBarBtn>
-          <NavBarBtn>
-            <NavLink to="/top_rated">#인기</NavLink>
-          </NavBarBtn>
+            </NavBarBtn>
+          </NavLink>
+          <NavLink to="/upcoming">
+            <NavBarBtn>#상영예정</NavBarBtn>
+          </NavLink>
+          <NavLink to="/now_playing">
+            <NavBarBtn>#박스오피스</NavBarBtn>
+          </NavLink>
+          <NavLink to="/top_rated">
+            <NavBarBtn>#인기</NavBarBtn>
+          </NavLink>
         </Links>
         <MenuButton
           onClick={() => {
@@ -112,6 +112,9 @@ const Links = styled.div`
     @media only screen and (max-width: 768px) {
       font-size: 20px;
     }
+  }
+  a {
+    height: 100%;
   }
 `
 
