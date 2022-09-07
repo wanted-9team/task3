@@ -15,6 +15,7 @@ const MovieCard = ({ poster, title, vote }) => {
           alt=""
         />
       </MovieImageDiv>
+
       <MovieContent>
         <MovieContentHeader>
           <MovieTitle>{title}</MovieTitle>

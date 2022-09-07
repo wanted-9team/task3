@@ -1,7 +1,7 @@
 import { Axios } from 'api'
 
-export const popularMovieApi = async () => {
-  return await Axios.get('/movie/popular')
+export const popularMovieApi = async currentPage => {
+  return await Axios.get('/movie/popular', { params: { page: currentPage } })
 }
 export const getMovieList = async (url, page) => {
   try {
@@ -18,4 +18,17 @@ export const getMovieList = async (url, page) => {
     console.log(err)
     return err
   }
+}
+
+export const getSearchResults = async (title, page) => {
+  const res = await Axios({
+    url: `/search/movie`,
+    method: 'get',
+    params: {
+      query: title,
+      page,
+    },
+  })
+
+  return res.data
 }
