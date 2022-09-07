@@ -11,9 +11,9 @@ import 'react-loading-skeleton/dist/skeleton.css'
 
 const SearchResults = () => {
   const location = useLocation()
-  const searchWord = 'YES' // 추후 삭제
-  // const searchWord = location.state.searchWord
+  const searchWord = location.state
   const lowerSearchWord = searchWord.toLowerCase()
+
   const { ref, inView } = useInView()
 
   const { data, isLoading, hasNextPage, fetchNextPage, isFetching, isFetchingNextPage, refetch } =
@@ -45,20 +45,20 @@ const SearchResults = () => {
     <SearchResultWrapper>
       {(
         <SearchWord>
-          '{searchWord}'에 대한 {data?.pages[0].total_results}개의 결과가 있습니다.
+          <BoldSearchWord>'{searchWord}'</BoldSearchWord>에 대한&nbsp;
+          <BoldSearchWord> {data?.pages[0].total_results}</BoldSearchWord>개의 결과가 있습니다.
         </SearchWord>
       ) || <Skeleton />}
       <MovieList>
         {data?.pages.length > 0 &&
           data.pages?.map(({ results }) =>
             results.map(movie => (
-              <MovieCardWrapper key={movie.id}>
-                <MovieCard
-                  title={movie.title}
-                  poster={movie.poster_path}
-                  vote={movie.vote_average}
-                />
-              </MovieCardWrapper>
+              <MovieCard
+                key={movie.id}
+                title={movie.title}
+                poster={movie.poster_path}
+                vote={movie.vote_average}
+              />
             )),
           )}
       </MovieList>
@@ -73,13 +73,18 @@ const SearchResults = () => {
 
 export default SearchResults
 
-const SearchResultWrapper = styled.div`
-  ${({ theme }) => theme.flex('column')}
+const SearchResultWrapper = styled.div``
+
+const SearchWord = styled.div`
+  ${({ theme }) => theme.flex('row', 'center', 'top')};
+  font-size: 32px;
+  font-weight: 400;
+  padding: 1.5em 0;
+  border-bottom: 1px solid #ddd;
 `
 
-const SearchWord = styled.p`
-  font-size: 1.5rem;
-  ${({ theme }) => theme.headerFont}
+const BoldSearchWord = styled.span`
+  font-weight: 700;
 `
 
 const MovieList = styled.div`
@@ -87,8 +92,4 @@ const MovieList = styled.div`
   flex-wrap: wrap;
   max-width: 1200px;
   margin: 0 auto;
-`
-const MovieCardWrapper = styled.div`
-  padding: 10px;
-  width: 300px;
 `
