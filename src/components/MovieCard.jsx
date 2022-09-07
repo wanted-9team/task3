@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import { AiFillStar } from 'react-icons/ai'
 
-import { MovieImageDiv as StyleMovieImageDiv } from './SkeletonCard'
+import { MovieImageDiv as SkeletonMovieImageDiv } from './SkeletonCard'
 const MovieCard = ({ poster, title, vote }) => {
   const [loaded, setLoaded] = useState(false)
   const onLoad = () => {
@@ -22,7 +22,7 @@ const MovieCard = ({ poster, title, vote }) => {
           onLoad={onLoad}
           loaded={loaded}
         />
-        {!loaded && <StyleMovieImageDiv />}
+        {!loaded && <SkeletonMovieImageDiv />}
       </MovieImageDiv>
       <MovieContent>
         <MovieVote>

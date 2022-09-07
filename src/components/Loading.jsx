@@ -5,6 +5,7 @@ const Loading = () => {
   return (
     <Wrapper>
       <Spinner />
+      <h2>Loading...</h2>
     </Wrapper>
   )
 }
@@ -21,8 +22,10 @@ const rotate360 = keyframes`
 `
 const Wrapper = styled.div`
   position: fixed;
-  bottom: 12%;
-  right: 3%;
+  bottom: 10%;
+  right: 1%;
+  display: flex;
+  align-items: center;
 `
 const Spinner = styled.div`
   animation: ${rotate360} 1s linear infinite;
@@ -35,4 +38,5 @@ const Spinner = styled.div`
   width: 40px;
   height: 40px;
   border-radius: 50%;
+  margin-right: 10px;
 `
