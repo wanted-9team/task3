@@ -19,8 +19,9 @@ const rotate360 = keyframes`
   }
 `
 const Wrapper = styled.div`
-  ${({ theme }) => theme.absolute('50%', '', '', '50%')};
-  transform: translate(-50%, -50%);
+  position: fixed;
+  bottom: 12%;
+  right: 5%;
 `
 const Spinner = styled.div`
   animation: ${rotate360} 1s linear infinite;

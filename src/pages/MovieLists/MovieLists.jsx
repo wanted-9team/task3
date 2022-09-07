@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import Loading from 'components/Loading'
 import MovieCard from 'components/MovieCard'
 import MovieListPageTitle from './MovieListPageTitle'
@@ -44,18 +44,25 @@ const MovieLists = () => {
   if (isLoading) return <Loading />
 
   return (
-    <MoviePageContainer>
-      <MovieListPageTitle movieListQueryKey={movieListQueryKey} />
-      <MovieListBox>
-        {movieResults &&
-          movieResults.map(movie => (
-            <MovieCardWrapper key={movie.id} onClick={() => handleNavigate(movie.id)}>
-              <MovieCard title={movie.title} poster={movie.poster_path} vote={movie.vote_average} />
-            </MovieCardWrapper>
-          ))}
-      </MovieListBox>
-      {hasNextPage ? <div ref={ref}>{isFetching ? <Loading /> : null}</div> : null}
-    </MoviePageContainer>
+    <>
+      {isFetching && <Loading />}
+      <MoviePageContainer>
+        <MovieListPageTitle movieListQueryKey={movieListQueryKey} />
+        <MovieListBox>
+          {movieResults &&
+            movieResults.map(movie => (
+              <MovieCardWrapper key={movie.id} onClick={() => handleNavigate(movie.id)}>
+                <MovieCard
+                  title={movie.title}
+                  poster={movie.poster_path}
+                  vote={movie.vote_average}
+                />
+              </MovieCardWrapper>
+            ))}
+        </MovieListBox>
+        {hasNextPage ? <div ref={ref}></div> : null}
+      </MoviePageContainer>
+    </>
   )
 }
 export default MovieLists
