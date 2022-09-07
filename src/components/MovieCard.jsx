@@ -24,7 +24,6 @@ const MovieCard = ({ poster, title, vote }) => {
         />
         {!loaded && <StyleMovieImageDiv />}
       </MovieImageDiv>
-
       <MovieContent>
         <MovieVote>
           <MovieIconDiv>
@@ -101,12 +100,12 @@ const MovieRateDiv = styled.div`
 `
 
 const MovieVote = styled.div`
-  font-size: 30px;
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
   display: flex;
   align-items: center;
-  position: absolute;
-  top: 5px;
-  right: 5px;
+  font-size: 30px;
   color: ${({ theme }) => theme.hover};
 `
 
