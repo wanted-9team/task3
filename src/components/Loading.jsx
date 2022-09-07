@@ -10,6 +10,7 @@ const Loading = () => {
 }
 
 export default Loading
+
 const rotate360 = keyframes`
   from {
     transform: rotate(0deg);
@@ -18,11 +19,13 @@ const rotate360 = keyframes`
     transform: rotate(360deg);
   }
 `
+
 const Wrapper = styled.div`
   position: fixed;
   bottom: 12%;
   right: 5%;
 `
+
 const Spinner = styled.div`
   animation: ${rotate360} 1s linear infinite;
   transform: translate(-50%, -50%, 0);
