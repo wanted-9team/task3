@@ -6,16 +6,15 @@ const MovieCard = ({ poster, title, vote }) => {
   return (
     <MovieCardContainer>
       <MovieImageDiv>
-        <img
+        <MovieImage
           src={
             poster
               ? `https://image.tmdb.org/t/p/w300/${poster}`
               : 'https://cdn.discordapp.com/attachments/1014088216132988928/1016987090208182293/Vector.png'
           }
-          alt=""
+          alt="영화포스터"
         />
       </MovieImageDiv>
-
       <MovieContent>
         <MovieVote>
           <MovieIconDiv>
@@ -52,13 +51,14 @@ const MovieImageDiv = styled.div`
   width: 100%;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
-  & img {
-    width: 100%;
-    height: 100%;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    object-fit: cover;
-  }
+`
+
+const MovieImage = styled.img`
+  width: 100%;
+  height: 100%;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  object-fit: cover;
 `
 
 const MovieContent = styled.div`
@@ -86,12 +86,12 @@ const MovieRateDiv = styled.div`
 `
 
 const MovieVote = styled.div`
-  font-size: 30px;
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
   display: flex;
   align-items: center;
-  position: absolute;
-  top: 5px;
-  right: 5px;
+  font-size: 30px;
   color: ${({ theme }) => theme.hover};
 `
 
