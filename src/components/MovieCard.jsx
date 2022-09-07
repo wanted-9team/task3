@@ -5,7 +5,7 @@ import { AiFillStar } from 'react-icons/ai'
 const MovieCard = ({ poster, title, vote }) => {
   return (
     <MovieCardContainer>
-      <MovieHeader poster={poster}></MovieHeader>
+      <MovieHeader poster={`http://image.tmdb.org/t/p/w500/${poster}`}></MovieHeader>
       <MovieContent>
         <MovieContentHeader>
           <MovieTitle>{title}</MovieTitle>
