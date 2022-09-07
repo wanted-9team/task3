@@ -6,7 +6,14 @@ const MovieCard = ({ poster, title, vote }) => {
   return (
     <MovieCardContainer>
       <MovieImageDiv>
-        <img src={`https://image.tmdb.org/t/p/w500/${poster}`} alt="" />
+        <img
+          src={
+            poster
+              ? `https://image.tmdb.org/t/p/w300/${poster}`
+              : 'https://cdn.discordapp.com/attachments/1014088216132988928/1016987090208182293/Vector.png'
+          }
+          alt=""
+        />
       </MovieImageDiv>
 
       <MovieContent>
@@ -27,14 +34,15 @@ const MovieCard = ({ poster, title, vote }) => {
 const MovieCardContainer = styled.div`
   background: ${({ theme }) => theme.white};
   box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  max-width: 315px;
+  width: 300px;
+  height: 420px;
   margin: 2em;
   border-radius: 10px;
   transition: all 0.3s;
+  position: relative;
 
   &:hover {
-    transform: scale(1.01);
+    transform: scale(1.1);
     box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.08);
   }
 `
@@ -59,9 +67,7 @@ const MovieContent = styled.div`
 
 const MovieContentHeader = styled.div`
   width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
+  ${({ theme }) => theme.flex}
 `
 
 const MovieTitle = styled.div`
@@ -74,8 +80,12 @@ const MovieIconDiv = styled.div``
 const MovieRateDiv = styled.div``
 
 const MovieVote = styled.div`
-  font-size: 24px;
+  font-size: 30px;
   display: flex;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  color: ${({ theme }) => theme.hover};
 `
 
 export default MovieCard
