@@ -5,16 +5,17 @@ import { AiTwotoneStar } from 'react-icons/ai'
 const SkeletonCard = () => {
   return (
     <MovieCardContainer>
-      <MovieHeader></MovieHeader>
+      <MovieImageDiv></MovieImageDiv>
+
       <MovieContent>
+        <MovieVote>
+          <MovieIconDiv>
+            <AiTwotoneStar />
+          </MovieIconDiv>
+          <MovieRateDiv></MovieRateDiv>
+        </MovieVote>
         <MovieContentHeader>
           <MovieTitle></MovieTitle>
-          <MovieVote>
-            <MovieIconDiv>
-              <AiTwotoneStar />
-            </MovieIconDiv>
-            <MovieRateDiv></MovieRateDiv>
-          </MovieVote>
         </MovieContentHeader>
       </MovieContent>
     </MovieCardContainer>
@@ -42,10 +43,11 @@ const SkeletonAnimation = keyframes`
 `
 
 const MovieCardContainer = styled.div`
+  position: relative;
   background: ${({ theme }) => theme.white};
   box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  max-width: 315px;
+  width: 300px;
+  height: 450px;
   margin: 2em;
   border-radius: 10px;
   translate: all 0.3s;
@@ -55,14 +57,21 @@ const MovieCardContainer = styled.div`
     box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.08);
   }
 `
-const MovieHeader = styled.div`
+const MovieImageDiv = styled.div`
   height: 360px;
   width: 100%;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
-  background: ${({ theme }) => theme.white} no-repeat;
-  background-size: cover;
   animation: ${SkeletonAnimation} 1.8s infinite ease-in-out;
+
+  & img {
+    width: 100%;
+    height: 100%;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    object-fit: cover;
+    animation: ${SkeletonAnimation} 1.8s infinite ease-in-out;
+  }
 `
 
 const MovieContent = styled.div`
@@ -90,11 +99,17 @@ const MovieIconDiv = styled.div`
   color: rgb(165, 165, 165);
 `
 
-const MovieRateDiv = styled.div``
+const MovieRateDiv = styled.div`
+  margin-right: 10px;
+  animation: ${SkeletonAnimation} 1.8s infinite ease-in-out;
+`
 
 const MovieVote = styled.div`
-  font-size: 24px;
+  font-size: 30px;
   display: flex;
+  position: absolute;
+  top: 5px;
+  right: 5px;
 `
 
 export default SkeletonCard
