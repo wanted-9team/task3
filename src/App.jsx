@@ -7,6 +7,7 @@ import MovieMain from 'pages/MovieMain/MovieMain'
 import MovieLists from 'pages/MovieLists/MovieLists'
 import MovieDetail from 'pages/MovieDetail/MovieDetail'
 import SearchResults from 'pages/SearchResults/SearchResults'
+import TopButton from 'components/TopButton'
 
 function App() {
   const queryClient = new QueryClient()
@@ -23,6 +24,7 @@ function App() {
           <Route path="/movie_detail/:id" element={<MovieDetail />} />
           <Route path="/search_results" element={<SearchResults />} />
         </Routes>
+        <TopButton />
         <Footer />
       </QueryClientProvider>
     </BrowserRouter>

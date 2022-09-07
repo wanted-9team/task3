@@ -6,7 +6,7 @@ const useScrollToggle = (initState = false) => {
 
   const updateScroll = () => {
     const { scrollY } = window
-    scrollY > 10 ? setScrollFlag(true) : setScrollFlag(false)
+    scrollY > 100 ? setScrollFlag(true) : setScrollFlag(false)
   }
   const handleScroll = throttle(updateScroll, 100)
 
