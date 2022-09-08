@@ -9,7 +9,7 @@ const Footer = () => {
   }
   return (
     <FooterContainer>
-      <FooterCopyright>{`© ${thisYear()} 원티드 프리오보딩 코스 6차 9조`}</FooterCopyright>
+      <FooterCopyright>{`© ${thisYear()} 원티드 프리온보딩 코스 6차 9조`}</FooterCopyright>
       <FooterGithub>
         <FooterLink href="https://github.com/wanted-9team/task3">
           <AiFillGithub />
