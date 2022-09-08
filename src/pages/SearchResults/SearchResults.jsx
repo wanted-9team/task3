@@ -3,6 +3,7 @@ import { getSearchResults } from 'utils/MovieApi'
 import { useInfiniteQuery } from '@tanstack/react-query'
 import Loading from 'components/Loading'
 import MovieCard from 'components/MovieCard'
+import EmptyResult from 'components/EmptyResult'
 import { useInView } from 'react-intersection-observer'
 import styled from 'styled-components'
 import { useNavigate, useLocation } from 'react-router-dom'
@@ -16,18 +17,17 @@ const SearchResults = () => {
   const { ref, inView } = useInView()
   const navigate = useNavigate()
 
-  const { data, isLoading, hasNextPage, fetchNextPage, isFetching, isFetchingNextPage, refetch } =
-    useInfiniteQuery(
-      ['search_result'],
-      ({ pageParam = 1 }) => getSearchResults(lowerSearchWord, pageParam),
-      {
-        getNextPageParam: (lastPage, allPages) => {
-          const maxPages = lastPage.total_pages
-          const nextPage = lastPage.page + 1
-          return nextPage <= maxPages ? nextPage : undefined
-        },
+  const { data, isLoading, hasNextPage, fetchNextPage, isFetching, refetch } = useInfiniteQuery(
+    ['search_result'],
+    ({ pageParam = 1 }) => getSearchResults(lowerSearchWord, pageParam),
+    {
+      getNextPageParam: (lastPage, allPages) => {
+        const maxPages = lastPage.total_pages
+        const nextPage = lastPage.page + 1
+        return nextPage <= maxPages ? nextPage : undefined
       },
-    )
+    },
+  )
 
   useEffect(() => {
     refetch()
@@ -67,18 +67,18 @@ const SearchResults = () => {
             )),
           )}
       </MovieList>
-      {hasNextPage ? (
-        <div ref={ref}>
-          <div>{isFetching && !isFetchingNextPage ? 'Fetching...' : '마지막 페이지'}</div>
-        </div>
-      ) : null}
+      {hasNextPage ? <div ref={ref}> {isFetching && <Loading />}</div> : <EmptyResult />}
     </SearchResultWrapper>
   )
 }
 
 export default SearchResults
 
-const SearchResultWrapper = styled.div``
+const SearchResultWrapper = styled.div`
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+`
 
 const SearchWord = styled.div`
   ${({ theme }) => theme.flex('row', 'center', 'top')};
@@ -93,9 +93,11 @@ const BoldSearchWord = styled.span`
 `
 
 const MovieList = styled.div`
-  ${({ theme }) => theme.flex('row', 'center', 'top')}
-  flex-wrap: wrap;
-  max-width: 1200px;
-  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 2fr));
+  grid-auto-flow: row;
+  grid-gap: 10px;
+  padding: 30px 0;
+  justify-items: center;
 `
 const MovieCardWrapper = styled.div``

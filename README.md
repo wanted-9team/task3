@@ -106,9 +106,9 @@ src
 │   ├─MovieMain
 │   │   └─MovieMain.jsx
 │   ├─MovieLists
-│		│   └─MovieLists.jsx
+│   │   └─MovieLists.jsx
 │   ├─MovieDetail
-│		│   └─MovieDetail.jsx
+│   │   └─MovieDetail.jsx
 │   └─Search
 │       └─Search.jsx
 ├─styles
