@@ -1,4 +1,4 @@
-# 원티드 프리온보딩 6차 2차 과제
+# 원티드 프리온보딩 6차 3차 과제
 
 ## 9팀 소개
 
@@ -10,7 +10,7 @@
 
 원티드 프리온보딩 프론트엔드 기업협업과제 - **영화 트레일러 사이트 만들기**
 
-[👉 선발 과제 관련 링크]()
+[👉 선발 과제 관련 링크](https://task3-phi.vercel.app/)
 
 - 수행 기간: 2022년 9월 6일 ~ 9월 8일
 
@@ -70,19 +70,20 @@ $ npm start
 <img src="https://img.shields.io/badge/ReactQuery-FF4154?style=flat-square&logo=React-query&logoColor=white"/>
 
 - 선택 이유:
+  - #### styled-component
   - 컴포넌트 이름을 가독성 좋게 구성할 수 있기 때문에 유지 보수에 좋습니다.
   - 컴포넌트 단위로 스타일을 지정해줄 수 있어 재사용성이 높습니다.
   - 컴포넌트의 props를 활용해서 경우에 따른 스타일을 적용시켜 줄 수 있습니다.
   - 클래스나, 태그 중복에 의한 스타일 에러를 막아주기 때문에 일반 css나 scss보다 유용합니다.
   - 기본적으로 scss와 비슷한 문법으로 사용법이 어렵지 않습니다.
   - css-in-js 라이브러리중 가장 널리 쓰이며, 참고할 수 있는 자료가 많습니다.
+  - #### react-query
   - react-query 라이브러리를 활용하여 data를 받아오는 과정에서 loading, error 관련 핸들링이 용이합니다.
   - React 어플리케이션 내에서 데이터 패칭, 캐싱, 동기적, 그리고 서버의 상태의 업데이트를 좀 더 용이하기 위해 만들어준다.
   - 기존에는 직접 만들어서 사용했던 기능들을 별도의 옵션으로 지원하여 복잡하고 이해할 수 없는 수많은 코드를 대신 React-Query 로직을 통해 짧은 코드로 대체할 수 있게 되었다.
   - 프로젝트 구조가 기존보다 단순해져 애플리케이션을 유지 보수하기 쉽고, 새로운 기능을 쉽게 구축할 수 있다.
 
 <summary style="font-size:17px">폴더 구조</summary>
-
 
 ```bash
 |   App.jsx
@@ -110,27 +111,27 @@ $ npm start
 |   +---MovieLists
 |   |   |   MovieLists.jsx
 |   |   |
-|   |   \---components
+|   |   ---components
 |   |           MovieListPageTitle.jsx
 |   |
 |   +---MovieMain
 |   |   |   MovieMain.jsx
 |   |   |
-|   |   \---components
+|   |   ---components
 |   |           Carousel.jsx
 |   |           CarouselItem.jsx
 |   |
 |   +---PageNotFound
 |   |       PageNotFound.jsx
 |   |
-|   \---SearchResults
+|   ---SearchResults
 |           SearchResults.jsx
 |
 +---styles
 |       GlobalStyle.js
 |       Theme.js
 |
-\---utils
+---utils
         MovieApi.js
         throttle.js
 
@@ -139,4 +140,5 @@ $ npm start
 </details>
 
 ## 코드 컨벤션
+
 [코드 컨벤션](https://github.com/wanted-9team/task3/wiki)

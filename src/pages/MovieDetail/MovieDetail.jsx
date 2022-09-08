@@ -169,7 +169,12 @@ const OverViewTitle = styled.div`
   margin-top: 10px;
   margin-bottom: 10px;
 `
-const Overview = styled.div``
+const Overview = styled.div`
+  word-break: keep-all;
+  line-height: 20px;
+  letter-spacing: 1px;
+  padding: 0 10px;
+`
 
 const ProductionContainer = styled.div`
   ${({ theme }) => theme.flex('row', 'center', 'center')}
