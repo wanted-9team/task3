@@ -116,3 +116,6 @@ src
 ```
 
 </details>
+
+## 코드 컨벤션
+[코드 컨벤션](https://github.com/wanted-9team/task3/wiki)
