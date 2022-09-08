@@ -73,6 +73,5 @@ const MovieListBox = styled.div`
   grid-auto-flow: row;
   grid-gap: 10px;
   padding: 30px 0;
-
   justify-items: center;
 `
