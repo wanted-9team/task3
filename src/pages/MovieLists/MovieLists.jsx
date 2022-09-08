@@ -19,7 +19,7 @@ const MovieLists = () => {
     [`${movieListQueryKey}`, `${pathname}`],
     ({ pageParam = 1 }) => getMovieListApi(movieListQueryKey, pageParam),
     {
-      getNextPageParam: (lastPage, allPages) => {
+      getNextPageParam: (lastPage, _) => {
         const maxPages = lastPage.total_pages
         const nextPage = lastPage.page + 1
         return nextPage <= maxPages ? nextPage : undefined

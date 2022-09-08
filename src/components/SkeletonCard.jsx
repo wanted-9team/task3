@@ -6,7 +6,6 @@ const SkeletonCard = () => {
   return (
     <MovieCardContainer>
       <MovieImageDiv></MovieImageDiv>
-
       <MovieContent>
         <MovieVote>
           <MovieIconDiv>
