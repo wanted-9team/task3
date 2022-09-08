@@ -26,3 +26,11 @@ export const getSearchResults = async (title, page) => {
   })
   return res.data
 }
+
+export const detailMovieApi = async id => {
+  return await Axios.get(`/movie/${id}`)
+}
+
+export const detailMovieVideoApi = async id => {
+  return await Axios.get(`/movie/${id}/videos`)
+}
