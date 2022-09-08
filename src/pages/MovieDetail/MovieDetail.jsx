@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { detailMovieApi, detailMovieVideoApi } from 'utils/MovieApi'
 import { useParams } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import styled from 'styled-components'
+import { AiFillStar } from 'react-icons/ai'
 
-const MovieDetail = ({ id }) => {
+const MovieDetail = () => {
   const BASE_IMG_URL = 'https://image.tmdb.org/t/p/w300/'
   const BASE_LOGO_URL = 'https://image.tmdb.org/t/p/w200/'
   const BASE_VIDEO_URL = 'https://youtube.com/embed/'
@@ -48,11 +49,18 @@ const MovieDetail = ({ id }) => {
     <>
       <TotalContainer>
         <SummaryContainer>
-          <PosterImage src={`${BASE_IMG_URL}${movieDetail.poster_path}`} />
+          <PosterImage
+            src={
+              movieDetail.poster_path
+                ? `${BASE_IMG_URL}${movieDetail.poster_path}`
+                : 'https://cdn.discordapp.com/attachments/1014088216132988928/1016987090208182293/Vector.png'
+            }
+          />
+
           <SummaryBodyContainer>
             <TitleContainer>
               <KOTitle>
-                {movieDetail.title} ({parseYear(movieDetail.release_date)})
+                {movieDetail.title}({parseYear(movieDetail.release_date)})
               </KOTitle>
               <ENTitleAndRunningTime>
                 {movieDetail.original_title} • {movieDetail.runtime} minutes
@@ -63,6 +71,12 @@ const MovieDetail = ({ id }) => {
                 return <Genre key={genre.id}>{genre.name}</Genre>
               })}
             </GenreContainer>
+            <MovieVote>
+              <MovieIconDiv>
+                <AiFillStar />
+              </MovieIconDiv>
+              <MovieRateDiv>{movieDetail.vote_average}</MovieRateDiv>
+            </MovieVote>
             <Tagline>{movieDetail.tagline}</Tagline>
             <OverViewTitle>개요</OverViewTitle>
             {movieDetail.overview !== '' ? (
@@ -81,7 +95,7 @@ const MovieDetail = ({ id }) => {
             </ProductionContainer>
           </SummaryBodyContainer>
         </SummaryContainer>
-        {video === [] ? (
+        {video && video.length !== 0 ? (
           <VideoContainer>
             <VideoTitle>{video[0].name}</VideoTitle>
             <Video
@@ -101,10 +115,14 @@ export default MovieDetail
 
 const TotalContainer = styled.div`
   ${({ theme }) => theme.flex('column', 'center', 'center')}
+  margin: 50px;
+  padding: 10px;
+  height: 900px;
 `
 const SummaryContainer = styled.div`
   ${({ theme }) => theme.flex('row', 'center', 'center')}
   align-content: space-around;
+  margin-bottom: 30px;
 `
 
 const PosterImage = styled.img`
@@ -114,7 +132,7 @@ const PosterImage = styled.img`
 `
 
 const SummaryBodyContainer = styled.div`
-  width: 300px;
+  width: 500px;
   height: 450px;
   ${({ theme }) => theme.flex('column', 'space-around', 'start')}
   text-align: justify;
@@ -148,12 +166,13 @@ const Tagline = styled.div`
 `
 const OverViewTitle = styled.div`
   font-weight: 800;
+  margin-top: 10px;
+  margin-bottom: 10px;
 `
 const Overview = styled.div``
 
 const ProductionContainer = styled.div`
   ${({ theme }) => theme.flex('row', 'center', 'center')}
-  margin: 10px;
 `
 
 const ProductionLogo = styled.img`
@@ -173,12 +192,25 @@ const VideoTitle = styled.div`
 `
 
 const Video = styled.iframe`
-  width: 400px;
-  height: 300px;
+  width: 500px;
+  height: 400px;
 `
 
 const NotFoundContainer = styled.div`
   margin: 20px;
   font-size: 30px;
   font-weight: 600;
+`
+
+const MovieVote = styled.div`
+  display: flex;
+  align-items: center;
+  font-size: 30px;
+  color: ${({ theme }) => theme.hover};
+`
+const MovieIconDiv = styled.div``
+
+const MovieRateDiv = styled.div`
+  margin-right: 10px;
+  border-radius: 5px;
 `
