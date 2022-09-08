@@ -10,9 +10,13 @@
 
 원티드 프리온보딩 프론트엔드 기업협업과제 - **영화 트레일러 사이트 만들기**
 
-[👉 선발 과제 관련 링크](https://task3-phi.vercel.app/)
+[👉 선발 과제 관련 링크](https://younuk.notion.site/65c217ea28d1421d9d01d5ee93be9b08)
 
 - 수행 기간: 2022년 9월 6일 ~ 9월 8일
+
+## 배포 URL
+
+[👉 바로 실행하기](https://task3-phi.vercel.app/)
 
 ## 실행 방법
 
@@ -35,6 +39,7 @@ $ npm start
 ## 과제 달성 사항 및 해결 방법
 
 - ### 공통
+
   - ☑ Loading 상태 표기
     - react-query의 isLoading 과 isFetching 값에 따라 Loading 여부를 표기 하였습니다
   - ☑ Infinite scroll
@@ -49,6 +54,7 @@ $ npm start
     - staletime : 전달받은 데이터는 리엑트 쿼리의 자료구조 내용 중 캐시에 저장이 되는데, 이때 이 캐시데이터의 "신선한 상태" 가 언제까지 될지를 말해주는 옵션이다. default는 0으로, 받아오는 즉시 stale하다고 판단하며 캐싱 데이터와 무관하게 계속해서 feching을 진행한다
     - cachetime : 캐시 구조에 저장된 데이터는 메모리상에 존재하게 된다. 이 때, 메모리에 저장되어 있는 캐시 데이터가 언제까지 유지될지를 말해주는 옵션이다. 즉, 캐싱된 쿼리의 결과값은 계속 유지되는 것이 아니라 시간이 지나면 메모리에서 사라진다. 쉽게 말해 contextAPI에 빗대자면 Provider의 value 내부에 저장된 객체내부 구조에서 존재했다가 사라지는 것과 비슷한 현상이다.
       이와같이 react-query로 받아온 데이터를 caching 하고, 데이터를 받아오는 과정에서 cachingTime을 정해주어 활용하였습니다
+
 - ### notion을 통한 각자 작업과정 공유
 
   <img width="1408" alt="스크린샷 2022-09-08 오전 10 50 32" src="https://user-images.githubusercontent.com/97271725/189015770-c9461a4c-6578-48bc-9e1d-ea8e0b9a8c93.png">
