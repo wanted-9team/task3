@@ -83,36 +83,57 @@ $ npm start
 
 <summary style="font-size:17px">폴더 구조</summary>
 
-```
-public
-  index.html
-src
-│  App.jsx
-│  index.jsx
-│
-├─api
-│   └─index.js
-│
-├─components
-│   ├─Header.jsx (검색창 포함)
-│   ├─Loading.jsx
-│   ├─MovieCard.jsx
-│   └─Footer.jsx
-│
-├─pages
-│   ├─MovieMain
-│   │   └─MovieMain.jsx
-│   ├─MovieLists
-│   │   └─MovieLists.jsx
-│   ├─MovieDetail
-│   │   └─MovieDetail.jsx
-│   └─Search
-│       └─Search.jsx
-├─styles
-│   ├─GlobalStyle.js
-│   └─StyleVariables.js / Theme.js
-│
-└─utils
+
+```bash
+|   App.jsx
+|   index.jsx
+|
++---api
+|       index.js
+|
++---components
+|       EmptyResult.jsx
+|       Footer.jsx
+|       Header.jsx
+|       Loading.jsx
+|       MovieCard.jsx
+|       SkeletonCard.jsx
+|       TopButton.jsx
+|
++---hooks
+|       useScrollToggle.js
+|
++---pages
+|   +---MovieDetail
+|   |       MovieDetail.jsx
+|   |
+|   +---MovieLists
+|   |   |   MovieLists.jsx
+|   |   |
+|   |   \---components
+|   |           MovieListPageTitle.jsx
+|   |
+|   +---MovieMain
+|   |   |   MovieMain.jsx
+|   |   |
+|   |   \---components
+|   |           Carousel.jsx
+|   |           CarouselItem.jsx
+|   |
+|   +---PageNotFound
+|   |       PageNotFound.jsx
+|   |
+|   \---SearchResults
+|           SearchResults.jsx
+|
++---styles
+|       GlobalStyle.js
+|       Theme.js
+|
+\---utils
+        MovieApi.js
+        throttle.js
+
 ```
 
 </details>
