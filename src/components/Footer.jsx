@@ -11,9 +11,9 @@ const Footer = () => {
     <FooterContainer>
       <FooterCopyright>{`© ${thisYear()} 원티드 프리오보딩 코스 6차 9조`}</FooterCopyright>
       <FooterGithub>
-        <a href="https://github.com/wanted-9team/task3">
+        <FooterLink href="https://github.com/wanted-9team/task3">
           <AiFillGithub />
-        </a>
+        </FooterLink>
       </FooterGithub>
     </FooterContainer>
   )
@@ -38,5 +38,7 @@ const FooterGithub = styled.div`
   font-size: 30px;
   margin-right: 10px;
 `
+
+const FooterLink = styled.a``
 
 export default Footer
