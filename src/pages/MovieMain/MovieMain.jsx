@@ -5,9 +5,9 @@ import { popularMovieApi } from 'utils/MovieApi'
 import Carousel from './components/Carousel'
 import MovieCard from 'components/MovieCard'
 import SkeletonCard from 'components/SkeletonCard'
+import { useNavigate } from 'react-router-dom'
 
 const MovieMain = () => {
-  const observerTargetEl = useRef(null)
   const { data, fetchNextPage, isFetching, isError } = useInfiniteQuery(
     ['popularMovie'],
     ({ pageParam = 1 }) => popularMovieApi(pageParam),
@@ -26,6 +26,10 @@ const MovieMain = () => {
     },
   )
 
+  const observerTargetEl = useRef(null)
+
+  const navigate = useNavigate()
+
   useEffect(() => {
     const bottomWindow = new IntersectionObserver(
       entries => {
@@ -37,6 +41,10 @@ const MovieMain = () => {
     )
     bottomWindow.observe(observerTargetEl.current)
   })
+
+  const goDetail = movieId => {
+    navigate(`/movie_detail/${movieId}`)
+  }
 
   return (
     <MainPageContainer>
@@ -51,12 +59,14 @@ const MovieMain = () => {
           {isFetching
             ? new Array(10).fill('').map((_, index) => <SkeletonCard key={index}></SkeletonCard>)
             : data?.map(movieList => (
-                <MovieCard
-                  key={movieList.id}
-                  poster={movieList.poster_path}
-                  title={movieList.title}
-                  vote={movieList.vote_average}
-                ></MovieCard>
+                <MovieCardWrapper onClick={() => goDetail(movieList.id)}>
+                  <MovieCard
+                    key={movieList.id}
+                    poster={movieList.poster_path}
+                    title={movieList.title}
+                    vote={movieList.vote_average}
+                  />
+                </MovieCardWrapper>
               ))}
         </MovieList>
       </MainPageSection>
@@ -104,3 +114,5 @@ const ErrorMessage = styled.p`
   font-size: 30px;
   color: red;
 `
+
+const MovieCardWrapper = styled.div``
