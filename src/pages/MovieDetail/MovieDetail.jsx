@@ -117,6 +117,7 @@ const TotalContainer = styled.div`
   ${({ theme }) => theme.flex('column', 'center', 'center')}
   margin: 50px;
   padding: 10px;
+  height: 900px;
 `
 const SummaryContainer = styled.div`
   ${({ theme }) => theme.flex('row', 'center', 'center')}
