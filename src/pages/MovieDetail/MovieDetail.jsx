@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { detailMovieApi, detailMovieVideoApi } from 'utils/MovieApi'
 import { useParams } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
@@ -7,7 +7,7 @@ import 'react-loading-skeleton/dist/skeleton.css'
 import styled from 'styled-components'
 import { AiFillStar } from 'react-icons/ai'
 
-const MovieDetail = ({ id }) => {
+const MovieDetail = () => {
   const BASE_IMG_URL = 'https://image.tmdb.org/t/p/w300/'
   const BASE_LOGO_URL = 'https://image.tmdb.org/t/p/w200/'
   const BASE_VIDEO_URL = 'https://youtube.com/embed/'
@@ -40,10 +40,6 @@ const MovieDetail = ({ id }) => {
     if (release_date) return release_date.split('-')[0]
   }
 
-  useEffect(() => {
-    console.log('video', video)
-    console.log(movieDetail)
-  })
   if (isDetailLoading || isVideoLoading) return <Skeleton count={2} />
 
   if (detailError || videoError)
@@ -99,7 +95,7 @@ const MovieDetail = ({ id }) => {
             </ProductionContainer>
           </SummaryBodyContainer>
         </SummaryContainer>
-        {!video ? (
+        {video && video.length !== 0 ? (
           <VideoContainer>
             <VideoTitle>{video[0].name}</VideoTitle>
             <Video
@@ -119,7 +115,8 @@ export default MovieDetail
 
 const TotalContainer = styled.div`
   ${({ theme }) => theme.flex('column', 'center', 'center')}
-  margin: 70px;
+  margin: 50px;
+  padding: 10px;
 `
 const SummaryContainer = styled.div`
   ${({ theme }) => theme.flex('row', 'center', 'center')}
@@ -134,7 +131,7 @@ const PosterImage = styled.img`
 `
 
 const SummaryBodyContainer = styled.div`
-  width: 300px;
+  width: 500px;
   height: 450px;
   ${({ theme }) => theme.flex('column', 'space-around', 'start')}
   text-align: justify;
