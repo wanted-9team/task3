@@ -5,6 +5,9 @@ const theme = {
   white: '#FFFFFF',
   border: '#717171',
   hover: '#fb0',
+  navy: '#021e39',
+  purpleLight: '#ba68c8',
+  purpleDark: '#9c27b0',
 
   flex: (direction = 'row', justify = 'center', align = 'center') => `
     display: flex;
@@ -22,12 +25,12 @@ const theme = {
   `,
 
   headerFont: css`
-    font-size: 24px;
+    font-size: 22px;
     font-weight: 700;
   `,
 
   normalFont: css`
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 400;
   `,
 }
