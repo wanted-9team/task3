@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { detailMovieApi } from 'utils/MovieApi'
+import { detailMovieApi, detailMovieVideoApi } from 'utils/MovieApi'
 import { useParams } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
 import styled from 'styled-components'
@@ -8,13 +8,30 @@ import { toBeInTheDocument } from '@testing-library/jest-dom/dist/matchers'
 const MovieDetail = ({ id }) => {
   const BASE_IMG_URL = 'https://image.tmdb.org/t/p/w300/'
   const BASE_LOGO_URL = 'https://image.tmdb.org/t/p/w200/'
+  const BASE_VIDEO_URL = 'https://youtube.com/embed/'
   const currentId = useParams()
 
   const getDetailMovieInfo = async () => {
     return await detailMovieApi(currentId.id)
   }
-  const { isLoading, error, data } = useQuery(['getDetail'], getDetailMovieInfo, {
+
+  const getMovieVideoInfo = async () => {
+    return await detailMovieVideoApi(currentId.id)
+  }
+  const {
+    isLoading: isDetailLoading,
+    error: detailError,
+    data: movieDetail,
+  } = useQuery(['detail_movie'], getDetailMovieInfo, {
     select: data => data.data,
+  })
+
+  const {
+    isLoading: isVideoLoading,
+    error: videoError,
+    data: video,
+  } = useQuery(['detail_movie_video'], getMovieVideoInfo, {
+    select: data => data.data.results,
   })
 
   const parseYear = release_date => {
@@ -22,48 +39,52 @@ const MovieDetail = ({ id }) => {
   }
 
   useEffect(() => {
-    console.log(data)
+    console.log(video)
   })
-  if (isLoading) return 'Loading'
+  if (isDetailLoading || isVideoLoading) return 'Loading'
 
-  if (error) return 'An error has occured: ' + error.message
+  if (detailError || videoError)
+    return 'An error has occured: ' + detailError?.message + 'or' + videoError?.message
 
   // 제목, 포스터, 별점, 제작 연도, 장르
   return (
     <>
-      {data !== [] ? (
-        <TotalContainer>
-          <SummaryContainer>
-            <PosterImage src={`${BASE_IMG_URL}${data.poster_path}`} />
-            <SummaryBodyContainer>
-              <TitleContainer>
-                <KOTitle>
-                  {data.title} ({parseYear(data.release_date)})
-                </KOTitle>
-                <ENTitleAndRunningTime>
-                  {data.original_title} • {data.runtime} minutes
-                </ENTitleAndRunningTime>
-              </TitleContainer>
-              <GenreContainer>
-                {data.genres.map(genre => {
-                  return <Genre key={genre.id}>{genre.name}</Genre>
-                })}
-              </GenreContainer>
-              <Tagline>{data.tagline}</Tagline>
-              <OverViewTitle>개요</OverViewTitle>
-              <Overview>{data.overview}</Overview>
-              <OverViewTitle>제작사</OverViewTitle>
-              <ProductionContainer>
-                {data.production_companies.map(production => {
-                  return <ProductionLogo src={`${BASE_LOGO_URL}${production.logo_path}`} />
-                })}
-              </ProductionContainer>
-            </SummaryBodyContainer>
-          </SummaryContainer>
-        </TotalContainer>
-      ) : (
-        <div>NOT FOUND</div>
-      )}
+      <TotalContainer>
+        <SummaryContainer>
+          <PosterImage src={`${BASE_IMG_URL}${movieDetail.poster_path}`} />
+          <SummaryBodyContainer>
+            <TitleContainer>
+              <KOTitle>
+                {movieDetail.title} ({parseYear(movieDetail.release_date)})
+              </KOTitle>
+              <ENTitleAndRunningTime>
+                {movieDetail.original_title} • {movieDetail.runtime} minutes
+              </ENTitleAndRunningTime>
+            </TitleContainer>
+            <GenreContainer>
+              {movieDetail.genres.map(genre => {
+                return <Genre key={genre.id}>{genre.name}</Genre>
+              })}
+            </GenreContainer>
+            <Tagline>{movieDetail.tagline}</Tagline>
+            <OverViewTitle>개요</OverViewTitle>
+            <Overview>{movieDetail.overview}</Overview>
+            <OverViewTitle>제작사</OverViewTitle>
+            <ProductionContainer>
+              {movieDetail.production_companies.map(production => {
+                return <ProductionLogo src={`${BASE_LOGO_URL}${production.logo_path}`} />
+              })}
+            </ProductionContainer>
+          </SummaryBodyContainer>
+        </SummaryContainer>
+        <VideoContainer>
+          <VideoTitle>{video[0].name}</VideoTitle>
+          <Video
+            src={`${BASE_VIDEO_URL}${video[0].key}?autoplay=1&mute=1`}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          ></Video>
+        </VideoContainer>
+      </TotalContainer>
     </>
   )
 }
@@ -130,4 +151,20 @@ const ProductionContainer = styled.div`
 const ProductionLogo = styled.img`
   width: 70px;
   margin: 7px;
+`
+
+const VideoContainer = styled.div`
+  ${({ theme }) => theme.flex('column', 'center', 'center')}
+  align-content: space-around;
+  margin-top: 30px;
+`
+const VideoTitle = styled.div`
+  font-size: 40px;
+  margin: 10px;
+  font-weight: 600;
+`
+
+const Video = styled.iframe`
+  width: 400px;
+  height: 300px;
 `
