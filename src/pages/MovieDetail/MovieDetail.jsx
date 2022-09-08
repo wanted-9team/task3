@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { detailMovieApi, detailMovieVideoApi } from 'utils/MovieApi'
 import { useParams } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
 import styled from 'styled-components'
-import { toBeInTheDocument } from '@testing-library/jest-dom/dist/matchers'
 
 const MovieDetail = ({ id }) => {
   const BASE_IMG_URL = 'https://image.tmdb.org/t/p/w300/'
@@ -38,15 +39,11 @@ const MovieDetail = ({ id }) => {
     if (release_date) return release_date.split('-')[0]
   }
 
-  useEffect(() => {
-    console.log(video)
-  })
-  if (isDetailLoading || isVideoLoading) return 'Loading'
+  if (isDetailLoading || isVideoLoading) return <Skeleton count={2} />
 
   if (detailError || videoError)
     return 'An error has occured: ' + detailError?.message + 'or' + videoError?.message
 
-  // 제목, 포스터, 별점, 제작 연도, 장르
   return (
     <>
       <TotalContainer>
@@ -68,22 +65,33 @@ const MovieDetail = ({ id }) => {
             </GenreContainer>
             <Tagline>{movieDetail.tagline}</Tagline>
             <OverViewTitle>개요</OverViewTitle>
-            <Overview>{movieDetail.overview}</Overview>
+            {movieDetail.overview !== '' ? (
+              <Overview>{movieDetail.overview}</Overview>
+            ) : (
+              <div>한국어 개요가 존재하지 않습니다.</div>
+            )}
+
             <OverViewTitle>제작사</OverViewTitle>
             <ProductionContainer>
               {movieDetail.production_companies.map(production => {
-                return <ProductionLogo src={`${BASE_LOGO_URL}${production.logo_path}`} />
+                if (production.logo_path !== null)
+                  return <ProductionLogo src={`${BASE_LOGO_URL}${production.logo_path}`} />
+                return <div></div>
               })}
             </ProductionContainer>
           </SummaryBodyContainer>
         </SummaryContainer>
-        <VideoContainer>
-          <VideoTitle>{video[0].name}</VideoTitle>
-          <Video
-            src={`${BASE_VIDEO_URL}${video[0].key}?autoplay=1&mute=1`}
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          ></Video>
-        </VideoContainer>
+        {video === [] ? (
+          <VideoContainer>
+            <VideoTitle>{video[0].name}</VideoTitle>
+            <Video
+              src={`${BASE_VIDEO_URL}${video[0].key}?autoplay=1&mute=1`}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            ></Video>
+          </VideoContainer>
+        ) : (
+          <NotFoundContainer>재생할 콘텐츠가 존재하지 않습니다.</NotFoundContainer>
+        )}
       </TotalContainer>
     </>
   )
@@ -167,4 +175,10 @@ const VideoTitle = styled.div`
 const Video = styled.iframe`
   width: 400px;
   height: 300px;
+`
+
+const NotFoundContainer = styled.div`
+  margin: 20px;
+  font-size: 30px;
+  font-weight: 600;
 `
