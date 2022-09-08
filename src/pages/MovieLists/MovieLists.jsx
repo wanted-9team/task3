@@ -68,6 +68,11 @@ const MoviePageContainer = styled.div`
 `
 const MovieCardWrapper = styled.div``
 const MovieListBox = styled.div`
-  ${({ theme }) => theme.flex('row', 'space-around')};
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 2fr));
+  grid-auto-flow: row;
+  grid-gap: 10px;
+  padding: 30px 0;
+
+  justify-items: center;
 `
